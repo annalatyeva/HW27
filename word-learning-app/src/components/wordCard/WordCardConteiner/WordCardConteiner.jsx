@@ -1,6 +1,7 @@
 import './WordCardConteiner.css';
 
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
+import { useRef } from 'react';
 import { Words } from '../../Words.js';
 
 import ArrowButton from '../ArrowButton/ArrowButton.jsx';
@@ -19,6 +20,8 @@ function WordCardConteiner () {
 
     const [currentIndex, setCurrentIndex] = useState(0);
     const [isFinished, setIsFinished] = useState(false);
+
+    const showTranslateButtonRef = useRef();
 
     const handleNext = () => {
         if (currentIndex < Words.length - 1) {
@@ -47,13 +50,17 @@ function WordCardConteiner () {
       const showTranslate = () => {
         setTranslate(!translated);
         setTranslatedCount(translatedCount + 1);
-        console.log(translatedWords);
         setTranslatedWords(prevState  => ({
           ...prevState,
           [currentIndex]: true
         }));
-        console.log(translatedWords);
     };
+
+    useEffect(() => {
+      if (!translated && showTranslateButtonRef.current) {
+        showTranslateButtonRef.current.focus();
+      }
+    }, [translated, showTranslateButtonRef]);
 
 
 
@@ -69,6 +76,7 @@ function WordCardConteiner () {
         />
         }
         <WordCard
+        showTranslateButtonRef={showTranslateButtonRef}
         isFinished={isFinished}
         tags={Words[currentIndex].tags}
         english={Words[currentIndex].english}
@@ -76,6 +84,8 @@ function WordCardConteiner () {
         translated={translated}
         russian={Words[currentIndex].russian}
         showTranslate={showTranslate}
+        translatedWords={translatedWords}
+        currentIndex={currentIndex.toString()}
         handleRestart={handleRestart}
         />
         
@@ -83,7 +93,7 @@ function WordCardConteiner () {
         ? <></>
         :
         <ArrowButton image={nextButton} onClick={handleNext}/>}
-        <div>Слов изучено: {translatedCount}</div>
+        <div className='translated-count'>Слов изучено: {translatedCount}</div>
     </div>
     );
 }

@@ -3,7 +3,7 @@
     flex-wrap: wrap;
     justify-content: center;
     width: 45vw;
-    margin: 28vh auto;
+    margin: 25vh auto 0px;
 }
 
 .word-card {
@@ -57,7 +57,7 @@
 .show-translate {
     background-color: rgba(255, 255, 255, 0);
     color: var(--darkBlue);
-    font-size: 1.2rem;
+    font-size: 1.3rem;
     font-weight: 600;
 }
 
@@ -66,8 +66,8 @@
 } 
 
 .translate-style {
-    margin-bottom: 2px;
-    font-size: 1.2rem;
+    margin-bottom: 3.8px;
+    font-size: 1.3rem;
 }
 
 .arrows {
@@ -93,6 +93,16 @@
     cursor: default;
 }
 
+.translated-count{
+    width: 60%;
+    padding: 1rem 0px;
+    font-size: 1.2rem;
+    font-family: var(--contentFont);
+    text-align: center;
+    background-color: var(--blue);
+    border-radius: 5px;
+    box-shadow: 7px 7px 5px 2px var(--boxShadowColor);
+}
 
 
 

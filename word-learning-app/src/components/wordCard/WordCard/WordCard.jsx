@@ -1,6 +1,5 @@
-
-
 function WordCard ({
+    showTranslateButtonRef,
     isFinished,
     tags,
     english,
@@ -8,8 +7,13 @@ function WordCard ({
     translated,
     russian,
     showTranslate,
-    handleRestart
-}) {
+    translatedWords,
+    currentIndex,
+    handleRestart,
+}) 
+
+
+{
     return (
     <div className="word-card">
         {!isFinished
@@ -18,9 +22,9 @@ function WordCard ({
             <div className='word-type'><a href="#">{tags}</a></div>
             <div className='word-style'>{english}</div>
             <div className='transcription-style'>[{transcription}]</div>
-                {translated 
-                ? (<div className='translate-style'>{russian}</div>)
-                : (<button className='show-translate' onClick={showTranslate}>Показать перевод</button>)}
+            {translated || translatedWords.hasOwnProperty(currentIndex.toString()) 
+            ? (<div className='translate-style'>{russian}</div>) 
+            : (<button ref={showTranslateButtonRef} className='show-translate' onClick={showTranslate} >Показать перевод</button>)}
             </>)
         : 
             (<>
